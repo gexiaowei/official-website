@@ -2,8 +2,8 @@ name: build docker image
 # Controls when the action will run.
 on:
   push:
-    tags:
-      - *
+    branches:
+      - main
   # Allows you to run this workflow manually from the Actions tab
   # 可以手动触发
   workflow_dispatch:
@@ -53,5 +53,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           # 给清单打上多个标签
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/chaibai:${{ github.event.registry_package.package_version.container_metadata.tag.name }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/chaibai:${{ steps.date.outputs.today }}
             ${{ secrets.DOCKERHUB_USERNAME }}/chaibai:latest
